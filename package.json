@@ -1,0 +1,77 @@
+{
+  "name": "GulpPowerStart",
+  "version": "1.0.0",
+  "description": "GulpPowerStart is a template boiler plate to get you started immediately",
+  "main": "gulpfile.js",
+  "dependencies": {},
+  "devDependencies": {
+    "angular": "^1.5.7",
+    "backbone": "^1.1.2",
+    "backbone-associations": "^0.6.2",
+    "bootstrap": "^3.3.7",
+    "bower": "^1.3.12",
+    "browser-sync": "^2.9.1",
+    "browserify": "^13.0.1",
+    "coffeeify": "^2.0.1",
+    "coffeelint-stylish": "^0.1.2",
+    "del": "^2.2.1",
+    "domurl": "^2.1.7",
+    "fastclick": "^1.0.6",
+    "font-awesome": "^4.6.3",
+    "glob": "^7.0.5",
+    "gulp": "^3.9.1",
+    "gulp-browserify": "^0.5.1",
+    "gulp-coffee": "^2.3.2",
+    "gulp-coffeelint": "^0.4.0",
+    "gulp-sass": "^2.3.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-strip-debug": "^1.1.0",
+    "gulp-uglify": "^1.5.3",
+    "handlebars": "^4.0.5",
+    "handlebars-layouts": "^3.1.3",
+    "handlebars-runtime": "^1.0.12",
+    "hbsfy": "^2.7.0",
+    "jquery": "^3.1.0",
+    "jquery-ui": "^1.12.0",
+    "jquery-waypoints": "^2.0.5",
+    "jquery.easing": "^1.3.2",
+    "lodash": "^2.4.2",
+    "node-polyglot": "^0.4.3",
+    "run-sequence": "^1.1.5",
+    "sass-module-importer": "^1.2.1",
+    "source-map": "^0.5.6",
+    "underscore": "^1.8.3",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "waypoints": "^4.0.1"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "hbsfy",
+        {
+          "extensions": [
+            "hbs"
+          ],
+          "precompilerOptions": {
+            "knownHelpersOnly": false,
+            "knownHelpers": {
+              "ifCond": true
+            }
+          }
+        }
+      ]
+    ]
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "setup": " npm install ",
+    "start": " gulp  "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:seanlon/GulpPowerStart.git"
+  },
+  "author": "seanlon",
+  "license": "ISC"
+}
