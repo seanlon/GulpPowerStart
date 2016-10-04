@@ -1,4 +1,7 @@
+[![N|logo](https://github.com/seanlon/GulpPowerStart/blob/master/LICENSE/Gulp-powerstart.png)](https://github.com/seanlon/GulpPowerStart/blob/master)
  
+
+
 ### GulpPowerStart - Backbone Series
 GulpPowerStart Series is a gulp based boilerplate for you to powerfully start developing your projects on the front end immediately and productively.
 Minimalistic, fast, 100% practical and structured.
@@ -15,6 +18,8 @@ In this backbone series, the build stacks used are gulp, browserify,coffeescript
 
 ### Awesome! How do i start ? 
 1) Just clone this repository. 
+
+
 2) For setup first time only, run
     ```sh
         npm run setup 
@@ -23,6 +28,8 @@ In this backbone series, the build stacks used are gulp, browserify,coffeescript
     ```sh
         npm install 
     ``` 
+
+
 3) To immediately begin developing,
     ```sh
         npm start
@@ -31,6 +38,8 @@ In this backbone series, the build stacks used are gulp, browserify,coffeescript
     ```sh
         gulp dev 
     ``` 
+
+
 4) To release and production final version,
     ```sh
         npm start-release
@@ -39,6 +48,8 @@ In this backbone series, the build stacks used are gulp, browserify,coffeescript
     ```sh
         gulp prod 
     ``` 
+
+    
  
 ### What is so special about this Backbone Series  ?
 This backbone series capitalize alot on handling the structure setup the mvc framework of backbone whereby you can quickly fully utilize the models, collections,controllers and bind the views into the handlebar sheet [.hbs] files.
