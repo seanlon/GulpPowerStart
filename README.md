@@ -24,7 +24,9 @@ In this backbone series, the build stacks used are gulp, browserify,coffeescript
     ```sh
         npm run setup 
     ``` 
+    
     or
+
     ```sh
         npm install 
     ``` 
@@ -35,6 +37,7 @@ In this backbone series, the build stacks used are gulp, browserify,coffeescript
         npm start
     ``` 
     or
+
     ```sh
         gulp dev 
     ``` 
@@ -45,11 +48,12 @@ In this backbone series, the build stacks used are gulp, browserify,coffeescript
         npm start-release
     ``` 
     or
+
     ```sh
         gulp prod 
     ``` 
 
-    
+
  
 ### What is so special about this Backbone Series  ?
 This backbone series capitalize alot on handling the structure setup the mvc framework of backbone whereby you can quickly fully utilize the models, collections,controllers and bind the views into the handlebar sheet [.hbs] files.
