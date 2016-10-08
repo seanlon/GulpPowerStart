@@ -21,7 +21,7 @@ var sourcemaps = require('gulp-sourcemaps');
 
 var ngrok     = require('ngrok');
 var psi       = require('psi'); 
-var siteUrl      = '';
+var siteUrl      = 'http://speedtest.net';
 var sitePort   = 3000;
 
 
@@ -81,13 +81,13 @@ gulp.task('ngrok-url', function(cb) {
 
 gulp.task('psi-general', function (cb) {
      // get the PageSpeed Insights report
-    psi(siteUrl).then(data => {
+    psi.output(siteUrl).then(data => {
       console.log(data.ruleGroups.SPEED.score);
       console.log(data.pageStats);
     });
 
     // output a formatted report to the terminal
-    psi.output(siteUrl).then(() => {
+    psi.output(siteUrl, {nokey: 'true', strategy: 'desktop'}).then(() => {
       console.log('done');
     }); 
 
