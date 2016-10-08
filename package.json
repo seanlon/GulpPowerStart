@@ -23,6 +23,7 @@
     "gulp-browserify": "^0.5.1",
     "gulp-coffee": "^2.3.2",
     "gulp-coffeelint": "^0.4.0",
+    "gulp-exit": "0.0.2",
     "gulp-sass": "^2.3.2",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-strip-debug": "^1.1.0",
@@ -36,8 +37,10 @@
     "jquery-waypoints": "^2.0.5",
     "jquery.easing": "^1.3.2",
     "lodash": "^2.4.2",
+    "ngrok": "^2.2.3",
     "node-polyglot": "^0.4.3",
-    "run-sequence": "^1.1.5",
+    "psi": "^2.0.4",
+    "run-sequence": "^1.2.2",
     "sass-module-importer": "^1.2.1",
     "source-map": "^0.5.6",
     "underscore": "^1.8.3",
@@ -66,7 +69,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "setup": " npm install ",
-    "start": " gulp  "
+    "start": " gulp  ",
+    "report": " gulp report > report.txt ",
     "start-release": " gulp prod "
   },
   "repository": {

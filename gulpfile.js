@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var browserSync = require('browser-sync').create();
+var browserSyncReport = require('browser-sync') ;
 var reload = browserSync.reload;
 var $ = require('jquery');
 var browserify = require('browserify');
@@ -18,32 +19,35 @@ var hbsfy = require('hbsfy');
 var source = require('vinyl-source-stream');
 var sourcemaps = require('gulp-sourcemaps');
 
+var ngrok     = require('ngrok');
+var psi       = require('psi'); 
+var siteUrl      = '';
+var sitePort   = 3000;
+
+
 var INPUT_PATH = './src';
 var OUTPUT_PATH = './dist';
 var NODE_PATH = './node_modules';
 
 
-
+gulp.task('report', ['clean'], function(cb) {
+    runSequence('serve-prod', 'run-pagespeed',cb);
+});
 gulp.task('dev', ['clean'], function(cb) {
-    runSequence('serve-dev', cb);
+    runSequence('serve-dev', 'browsersync',cb);
 });
 
 gulp.task('prod', ['clean'], function(cb) {
-    runSequence('serve-prod', cb);
+    runSequence('serve-prod', 'browsersync', cb);
 });
 
 gulp.task('serve-prod', ['generate-font-resource', 'generate-includes-resource', 'generate-html-resource', 'script-production', 'styles-production'], function() {
-    console.log('bundled production');
-    browserSync.init({
-        server: OUTPUT_PATH
-    });
+    console.log('bundled production');  
 });
 
-gulp.task('serve-dev', ['generate-font-resource', 'generate-includes-resource', 'generate-html-resource', 'script', 'styles'], function() {
-    browserSync.init({
-        server: OUTPUT_PATH
-    });
-    // gulp.watch('/sass/*.scss', ['sass']);
+gulp.task('serve-dev', ['generate-font-resource', 'generate-includes-resource', 'generate-html-resource', 'script', 'styles' ], function() {
+
+   console.log('bundled development');  
     gulp.watch(INPUT_PATH + '/sass/**/*.scss', ['styles']);
     gulp.watch(INPUT_PATH + '/*.html', ['generate-html-resource', reload]);
 
@@ -51,6 +55,71 @@ gulp.task('serve-dev', ['generate-font-resource', 'generate-includes-resource', 
     gulp.watch(INPUT_PATH + '/js/**/*.js', ['script', reload]);
 });
 
+gulp.task('browsersync', function (cb) {
+    browserSync.init({
+        server: OUTPUT_PATH , open: false,  port: sitePort
+    });
+});
+
+gulp.task('browsersync-psi',  function() {
+ 
+    browserSyncReport({server: OUTPUT_PATH, open: false,  port: sitePort}, function(err, bs) {
+        // console.log(bs.options.getIn(["urls", "local"]));
+    });
+ 
+});
+gulp.task('ngrok-url', function(cb) {
+  return ngrok.connect(sitePort, function (err, url) {
+    siteUrl = url;
+    console.log('Tunnel serve from: ' + url);
+    cb();
+  });
+});
+
+
+
+
+gulp.task('psi-general', function (cb) {
+     // get the PageSpeed Insights report
+    psi(siteUrl).then(data => {
+      console.log(data.ruleGroups.SPEED.score);
+      console.log(data.pageStats);
+    });
+
+    // output a formatted report to the terminal
+    psi.output(siteUrl).then(() => {
+      console.log('done');
+    }); 
+
+});
+
+
+gulp.task('psi-desktop', function (cb) {
+    // Supply options to PSI and get back speed and usability scores
+    psi(siteUrl, {nokey: 'true', strategy: 'mobile'}).then(data => {
+      console.log('Speed score: ' + data.ruleGroups.SPEED.score);
+      console.log('Usability score: ' + data.ruleGroups.USABILITY.score);
+    });
+});
+
+gulp.task('psi-mobile', function (cb) {
+    // Supply options to PSI and get back speed and usability scores
+    psi(siteUrl, {nokey: 'true', strategy: 'desktop'}).then(data => {
+      console.log('Speed score: ' + data.ruleGroups.SPEED.score);
+      console.log('Usability score: ' + data.ruleGroups.USABILITY.score);
+    });
+});
+
+gulp.task('run-pagespeed', function (cb) {
+  return runSequence( 
+    'browsersync-psi',
+    'ngrok-url',
+    'psi-general', 
+    'psi-desktop',
+    'psi-mobile',
+    cb
+  );
+});
 
 
 gulp.task('clean-coffeejs', function() {
