@@ -21,37 +21,42 @@ In this backbone series, the build stacks used are gulp, browserify,coffeescript
 
 
 2) For setup first time only, run
-    ```sh
-        npm run setup 
-    ``` 
-    
-    or
 
-    ```sh
+    
+        npm run setup  
+    
+    or 
         npm install 
-    ``` 
+     
 
 
 3) To immediately begin developing,
-    ```sh
-        npm start
-    ``` 
-    or
 
-    ```sh
+     
+        npm start
+     
+    or 
         gulp dev 
-    ``` 
+     
 
 
 4) To release and production final version,
-    ```sh
-        npm start-release
-    ``` 
-    or
 
-    ```sh
+     
+        npm start-release
+     
+    or 
         gulp prod 
-    ``` 
+      
+
+5) To speedtest the performance,run ,
+
+     
+        npm report
+     
+    or 
+        gulp report 
+      
 
 
  
@@ -63,13 +68,8 @@ The backbone code will be written in coffescript which gives you alot opportunit
 In this series, the handlebar moustache custom helper is also configured with some custom conditions like if equal condition, and more. So you can immediately use it and add more custom helpers!
 
 
-### What each combination stacks does ? 
- Coming soon..
-###   Where can I find working examples or DEMO?
-Coming soon..
 
-###   Full Documentation?
-Coming soon..
+ 
 
    
 
