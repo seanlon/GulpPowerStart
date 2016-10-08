@@ -5,16 +5,43 @@
 ### GulpPowerStart - Backbone Series
 GulpPowerStart Series is a gulp based boilerplate for you to powerfully start developing your projects on the front end immediately and productively.
 Minimalistic, fast, 100% practical and structured.
+
+### GulpPowerStart - What is setup here?
+
+BrowserSync 
+Browserify
+Live Reload - for watching file changes and reload immediately
+PageSpeedInsight - speed test performance report
+Build Profiles - Development, Production and Report
+
+Sass (LibSass)
+CSS Minifications , Autoprefixer
+Scss Lint 
+Coffeescript -  Classes, Compiler and bundler
+Scripting - Linter, Minification,Debugger Removals Strip, Bundler Concatenations
+Html - Handlbar Templatings and configured setup bindings
+HTML Minification
+Image Minification
+
+Backbone Js
+Handlebars with custom helperss
+Widget Component based lifecyles
+
+
+
  
-### What is this boilerplate template for? 
+ 
+ 
+
+
+### What is this boilerpvlate template for? 
 
 Imagine just running a command to get started without painfully integrating the tasks on the frontend build environments profiles like development and production release.
 
 We handle your build accordingly based on development and release. A case would be your package bundled in development will get raw uniminified , logged codes and watching to your live edited resources with auto reload each time you change.
 
 In production , the bundled will be a minified , uglified and compressed codes that removes logger and more.
-
-In this backbone series, the build stacks used are gulp, browserify,coffeescript, backbones,handlebars,SASS preprorcessors.
+ 
 
 ### Awesome! How do i start ? 
 1) Just clone this repository. 

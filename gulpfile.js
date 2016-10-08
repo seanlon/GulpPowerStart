@@ -13,6 +13,9 @@ var glob = require('glob');
 var coffee = require('gulp-coffee');
 var uglify = require('gulp-uglify');
 var buffer = require('vinyl-buffer');
+var prefix = require('gulp-autoprefixer') ; 
+var minifyHTML  = require('gulp-minify-html') ;
+var imageMin = require('gulp-imagemin') ; var pngquant    = require('imagemin-pngquant');
 var stripDebug = require('gulp-strip-debug');
 var coffeelint = require('gulp-coffeelint'); 
 var hbsfy = require('hbsfy');
@@ -41,11 +44,11 @@ gulp.task('prod', ['clean'], function(cb) {
     runSequence('serve-prod', 'browsersync', cb);
 });
 
-gulp.task('serve-prod', ['generate-font-resource', 'generate-includes-resource', 'generate-html-resource', 'script-production', 'styles-production'], function() {
+gulp.task('serve-prod', ['generate-font-resource', 'generate-includes-resource','minify-image', 'minify-html','generate-html-resource', 'script-production', 'styles-production'], function() {
     console.log('bundled production');  
 });
 
-gulp.task('serve-dev', ['generate-font-resource', 'generate-includes-resource', 'generate-html-resource', 'script', 'styles' ], function() {
+gulp.task('serve-dev', ['generate-font-resource', 'generate-includes-resource',  'generate-html-resource', 'script', 'styles' ], function() {
 
    console.log('bundled development');  
     gulp.watch(INPUT_PATH + '/sass/**/*.scss', ['styles']);
@@ -121,6 +124,30 @@ gulp.task('run-pagespeed', function (cb) {
   );
 });
 
+gulp.task('minify-image', function () {
+    return gulp.src(INPUT_PATH + '/image/**/*')
+        .pipe(imageMin({
+            progressive: true,
+            svgoPlugins: [{removeViewBox: false}],
+            use: [pngquant()]
+        }))
+        .pipe(gulp.dest(OUTPUT_PATH + '/image'))
+});
+
+gulp.task('minify-html', function() {
+    var opts = {
+      comments:true,
+      spare:true
+    };
+
+  gulp.src(INPUT_PATH + '/**/*.html')
+    .pipe(minifyHTML(opts))
+    .pipe(gulp.dest(OUTPUT_PATH))
+    .pipe(reload({stream:true}));
+ 
+
+
+});
 
 gulp.task('clean-coffeejs', function() {
     return del.sync([INPUT_PATH + '/js/scriptjs/']);
@@ -158,6 +185,7 @@ gulp.task('generate-font-resource', function() {
 gulp.task('styles-production', function() {
     return gulp.src(INPUT_PATH + '/sass/*.scss')
         .pipe(sass({ importer: moduleImporter() }))
+        .pipe(prefix())
         .pipe(sass({ outputStyle: 'compressed' }))
         .pipe(gulp.dest(OUTPUT_PATH + '/css'))
         .pipe(browserSync.stream());
